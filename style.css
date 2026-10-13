@@ -118,3 +118,6 @@ footer{background:var(--navy);color:#aebfe8;padding:44px 0 34px;font-size:14.5px
 footer .wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
 footer img{width:72px;height:72px}
 .fl{display:flex;align-items:center;gap:16px}
+
+/* keep faces in frame for portraits */
+.quote .ph img{object-position:center 38%}
