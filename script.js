@@ -6,7 +6,7 @@ var SITE={
   area:""        /* e.g. "Evander, Mpumalanga" */
 };
 /* Photos: put files in an "images" folder, then write the file name, e.g. hero1:"house1.jpg" */
-var PHOTOS={hero1:"",hero2:"",about:"",g1:"",g2:"",g3:"",g4:"",g5:"",g6:"",ceo:"",ceo2:""};
+var PHOTOS={hero1:"",hero2:"",about:"",g1:"",g2:"",g3:"",g4:"",g5:"",g6:"",ceo:"ntomzanele.jpg",ceo2:""};
 /* ============================ */
 document.querySelectorAll(".ph[data-k]").forEach(function(el){var f=PHOTOS[el.dataset.k];if(f){var i=new Image();i.src="images/"+f;i.alt="Twin Vision Projects project photo";i.onload=function(){el.textContent="";el.appendChild(i);el.classList.add("has")}}});
 function set(id,v){if(v)document.getElementById(id).textContent=v}
