@@ -5,10 +5,28 @@ var SITE={
   email:"twinvisionprojects@gmail.com",      /* e.g. "info@yourdomain.co.za" */
   area:"01 Impala Drive, Carletonville"        /* e.g. "Evander, Mpumalanga" */
 };
-/* Photos: put files in an "images" folder, then write the file name, e.g. hero1:"house1.jpg" */
-var PHOTOS={hero1:"",hero2:"",about:"",g1:"",g2:"",g3:"",g4:"",g5:"",g6:"",ceo:"ntomzanele.jpg",ceo2:""};
 /* ============================ */
-document.querySelectorAll(".ph[data-k]").forEach(function(el){var f=PHOTOS[el.dataset.k];if(f){var i=new Image();i.src="images/"+f;i.alt="Twin Vision Projects project photo";i.onload=function(){el.textContent="";el.appendChild(i);el.classList.add("has")}}});
+/* PHOTOS: automatic. Upload a picture into the "images" folder with one of these names
+   and it appears by itself (jpg, jpeg, png or webp, all lowercase):
+   hero1, hero2, about, project1 to project6, ntomzanele, ntombzodwa
+   Only use PHOTOS below if you want a different file name, e.g. hero1:"my-house.jpg" */
+var PHOTOS={hero1:"",hero2:"",about:"",g1:"",g2:"",g3:"",g4:"",g5:"",g6:"",ceo:"",ceo2:""};
+var NAMES={hero1:["hero1"],hero2:["hero2"],about:["about"],g1:["project1"],g2:["project2"],g3:["project3"],g4:["project4"],g5:["project5"],g6:["project6"],ceo:["ntomzanele","ceo"],ceo2:["ntombzodwa","ceo2"]};
+var EXT=["jpg","jpeg","png","webp","JPG","JPEG","PNG"];
+function loadPhoto(el,list){
+  if(!list.length)return;
+  var i=new Image();
+  i.onload=function(){el.textContent="";el.appendChild(i);el.classList.add("has")};
+  i.onerror=function(){loadPhoto(el,list.slice(1))};
+  i.alt="Twin Vision Projects";
+  i.src="images/"+list[0];
+}
+document.querySelectorAll(".ph[data-k]").forEach(function(el){
+  var k=el.dataset.k,list=[];
+  if(PHOTOS[k])list.push(PHOTOS[k]);
+  (NAMES[k]||[]).forEach(function(n){EXT.forEach(function(e){list.push(n+"."+e)})});
+  loadPhoto(el,list);
+});
 function set(id,v){if(v)document.getElementById(id).textContent=v}
 set("iph",SITE.phone);set("iem",SITE.email);set("iar",SITE.area);
 if(SITE.phone){var p=document.getElementById("iph");p.innerHTML="";SITE.phone.split("/").forEach(function(n,k){var a=document.createElement("a");a.href="tel:+27"+n.replace(/\D/g,"").replace(/^0/,"");a.textContent=n.trim();a.style.textDecoration="none";if(k)p.appendChild(document.createTextNode(" / "));p.appendChild(a)})}
